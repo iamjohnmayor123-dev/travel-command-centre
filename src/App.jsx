@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+// Add this to fix the broken Leaflet markers in production
+import L from 'leaflet';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  iconRetinaUrl: markerIcon2x,
+  shadowUrl: markerShadow,
+});
 import { MapPin, Calendar, Hotel, UtensilsCrossed, Bike, Sunrise, Sunset, Waves, Mountain, Palmtree, Sparkles, ChevronRight, Coffee, Leaf, Flame, CheckSquare, Square, ArrowLeft, Plane, Flag, Zap, Camera, Shield, Battery, Eye, Footprints, ExternalLink, AlertCircle, Map as MapIcon, Navigation } from 'lucide-react';
 
 const TravelCommandCenter = () => {
